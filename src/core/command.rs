@@ -1,4 +1,5 @@
 pub trait Command {
-    fn handle(args: std::env::Args);
-    fn id() -> &'static str;
+    fn handle(&self,args: std::env::Args);
+    fn help(&self);
+    fn id() -> String;
 }

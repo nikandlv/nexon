@@ -5,6 +5,12 @@ pub struct Handler {
 }
 
 impl Command for Handler {
-    fn handle(args: std::env::Args) { todo!() }
-    fn id() -> &'static str { "-h" }
+    
+    fn id() -> String { String::from("-h") }
+    fn handle(&self,args: std::env::Args) { 
+        println!("Nexon beta");
+        println!("Commands:");
+        println!("  -h help");
+     }
+fn help(&self) { todo!() }
 }
