@@ -8,7 +8,7 @@ impl Config {
 
     }
 
-    pub fn initialize() {
-
+    pub fn initialize() -> Config {
+        return  Config{}
     }
 }
