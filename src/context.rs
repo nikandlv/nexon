@@ -1,4 +1,4 @@
-use crate::core::config::Config;
+use crate::core::Config;
 
 pub struct Context {
     pub config: Config,

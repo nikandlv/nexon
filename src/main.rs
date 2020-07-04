@@ -5,10 +5,11 @@ pub mod commands;
 pub mod context;
 
 use crate::core::Command;
+pub use context::Context;
 
 fn main() {
     let (script, arguments) = parse_arguments();
-    let config = core::config::Config::initialize();
+    let config = core::Config::initialize();
     let context = context::Context{
         config,
         arguments,
