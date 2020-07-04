@@ -3,3 +3,6 @@ pub use command::*;
 
 pub mod config;
 pub use config::*;
+
+pub mod console;
+pub use console::*;

@@ -10,14 +10,16 @@ pub use context::Context;
 fn main() {
     let (script, arguments) = parse_arguments();
     let config = core::Config::initialize();
+    let console = core::Console::initialize();
     let context = context::Context{
         config,
         arguments,
+        console
     };
     let available_commands = commands::get_commands(); 
     match available_commands.get(&script) {
         Some(cmd) => {&cmd.handle(context);},
-        _ => panic!("Command {} not found", script),
+        _ => context.console.abort(format!("Command {} not found", script)),
     }
 }
 
