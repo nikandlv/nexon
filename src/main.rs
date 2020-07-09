@@ -26,6 +26,8 @@ fn main() {
         console
     };
 
+
+    println!("{:?}",context.config.pool);
     
     let available_commands = commands::get_commands(); 
     match available_commands.get(&script) {
