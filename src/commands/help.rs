@@ -13,5 +13,6 @@ impl Command for Handler {
         println!("Commands:");
         println!("  -h help");
      }
-fn help(&self) { todo!() }
+fn help(&self) -> &str { "a long help" }
+fn description(&self) -> &str { "a command which is written for test" }
 }
