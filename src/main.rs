@@ -4,13 +4,14 @@ use std::env::args;
 pub mod core;
 pub mod commands;
 pub mod context;
+pub use colored::*;
 
 use crate::core::Command;
 pub use context::Context;
 
 fn main() {
     let console = core::Console::initialize();
-    let (script_opt,arguments) = parse_arguments();
+    let (script_opt,mut arguments) = parse_arguments();
     if script_opt.is_none()  {
         console.logo();
         console.error(format!("No command provided"));
@@ -22,7 +23,7 @@ fn main() {
     
     let mut context = context::Context{
         config,
-        arguments,
+        arguments: &mut arguments,
         console
     };
 
@@ -47,10 +48,9 @@ fn main() {
 }
 
 fn help(ctx: &mut Context, cmds: HashMap<String,Box<dyn Command>> ){
-    let argument = ctx.arguments.nth(2);
-    if argument.is_some() {
-        let arg = argument.unwrap();
-        match cmds.get(&arg) {
+    if ctx.arguments.len() > 2 {
+        let arg = &ctx.arguments[2];
+        match cmds.get(arg) {
             Some(cmd) => {
                 ctx.console.write(format!("{}", &cmd.help()));
                 ctx.console.exit(0)
@@ -59,12 +59,16 @@ fn help(ctx: &mut Context, cmds: HashMap<String,Box<dyn Command>> ){
         }
     }
 
-    ctx.console.write(format!("Available Commands:"));
+    ctx.console.write(format!("{}","Available Commands:".blue()));
     for arg in cmds {
-        ctx.console.write(format!(" {}: {}",arg.0, arg.1.description()))
+        ctx.console.write(format!(" {}: {}",arg.0.yellow(), arg.1.description()))
     }
 }
 
-fn parse_arguments() -> (std::option::Option<std::string::String>, std::env::Args) {
-    (args().nth(1),args())
+fn parse_arguments() -> (std::option::Option<std::string::String>, Vec<String>) {
+    let mut arg_list  = vec!();
+    for arg in args() {
+        arg_list.append(&mut vec!(arg))
+    }
+    (args().nth(1),arg_list)
 }

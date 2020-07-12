@@ -1,7 +1,7 @@
 use crate::core::{Config, Console};
 
-pub struct Context { 
+pub struct Context<'a> { 
     pub config: Config,
-    pub arguments: std::env::Args,
+    pub arguments: &'a mut Vec<String>,
     pub console: Console
 }
