@@ -1,2 +1,2 @@
-[alias]
+[servers]
     "-url" = "postgres://postgres@localhost"

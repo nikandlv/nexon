@@ -1,2 +1,3 @@
 [alias]
     "-url" = "postgres://postgres@localhost"
+    "-test" = "postgres://postgres@localhost"

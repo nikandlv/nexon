@@ -19,15 +19,22 @@ fn main() {
     }
     let script = script_opt.unwrap();
     let config = core::Config::initialize();
-
+    
     let mut context = context::Context{
         config,
         arguments,
         console
     };
 
+    context.console.write(format!("{:?}", context.config.pool));
 
-    println!("{:?}",context.config.pool);
+    let alias_list = context.config.pool.get_table("alias");
+    if alias_list.is_err() {
+        return context.console.abort(format!("Invalid alias configuration, {}", alias_list.err().unwrap()))
+    }
+    for alias in alias_list.unwrap() {
+        println!("{:?}",alias)
+    }
     
     let available_commands = commands::get_commands(); 
     match available_commands.get(&script) {

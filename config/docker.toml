@@ -1,2 +1,8 @@
-[alias]
-    "-url" = "postgres://postgres@localhost"
+[docker]
+[docker.hello]
+    "image" = "hello-world"
+    "version" = "latest"
+    "network" = "nexon"
+[docker.hello.args]
+    "username" = "nikan"
+     
