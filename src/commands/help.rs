@@ -7,8 +7,8 @@ pub struct Handler {
 
 impl Command for Handler {
     
-    fn id() -> String { String::from("-h") }
-    fn handle(&self,ctx: Context) { 
+    fn id(&self) -> String { String::from("-h") }
+    fn handle(&self,_: Context) { 
         println!("Nexon beta");
         println!("Commands:");
         println!("  -h help");

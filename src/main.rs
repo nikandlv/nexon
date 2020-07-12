@@ -26,15 +26,15 @@ fn main() {
         console
     };
 
-    context.console.write(format!("{:?}", context.config.pool));
+    // context.console.write(format!("{:?}", context.config.pool));
 
-    let alias_list = context.config.pool.get_table("alias");
-    if alias_list.is_err() {
-        return context.console.abort(format!("Invalid alias configuration, {}", alias_list.err().unwrap()))
-    }
-    for alias in alias_list.unwrap() {
-        println!("{:?}",alias)
-    }
+    // let alias_list = context.config.pool.get_table("alias");
+    // if alias_list.is_err() {
+    //     return context.console.abort(format!("Invalid alias configuration, {}", alias_list.err().unwrap()))
+    // }
+    // for alias in alias_list.unwrap() {
+    //     println!("{:?}",alias)
+    // }
     
     let available_commands = commands::get_commands(); 
     match available_commands.get(&script) {
@@ -46,7 +46,7 @@ fn main() {
     }
 }
 
-fn help(ctx: &mut Context, cmds: HashMap<String,impl Command> ){
+fn help(ctx: &mut Context, cmds: HashMap<String,Box<dyn Command>> ){
     let argument = ctx.arguments.nth(2);
     if argument.is_some() {
         let arg = argument.unwrap();

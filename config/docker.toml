@@ -3,6 +3,7 @@
     "image" = "hello-world"
     "version" = "latest"
     "network" = "nexon"
+    "port" = ""
 [docker.hello.args]
     "username" = "nikan"
      
